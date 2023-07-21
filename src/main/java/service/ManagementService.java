@@ -18,6 +18,8 @@ public interface ManagementService {
 	 */
 	ArrayList<MemberVO> getMemberList(HttpServletRequest request);
 	
+	MemberVO getMember(HttpServletRequest request);
+	
 	/**
 	 * @param - 수정할 회원 정보
 	 * @return 성공 여부

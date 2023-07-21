@@ -3,6 +3,7 @@ package repositories;
 import java.util.ArrayList;
 
 import beans.NoticeVO;
+import util.SearchCriteria;
 
 public interface NoticeDAO {
 
@@ -17,12 +18,12 @@ public interface NoticeDAO {
 	 * @param count    - 검색에 포함할 게시물 개수
 	 * @return 페이징 처리된 게시글 목록을 리스트로 반환
 	 */
-	public ArrayList<NoticeVO> noticeList(int startRow, int count);
+	public ArrayList<NoticeVO> noticeList(SearchCriteria cri);
 
 	/**
 	 * @return int : 전체게시물 개수 totalCount
 	 */
-	public int getTotalCount();
+	public int getTotalCount(SearchCriteria cri);
 
 	// 게시글 상세보기
 	/**

@@ -25,11 +25,11 @@
 			<td>작성일</td>
 			<td>${notice.notice_date}</td>
 		</tr>
-		<c:if test="${sessionScope.member.u_id eq 'admin'}">
+		<c:if test="${sessionScope.member.id eq 'admin'}">
 			<tr>
 				<td colspan=2>
-					<a href="#">수정</a> | 
-					<a href="#">삭제</a></td>
+					<a href="${pageContext.request.contextPath}/board/notice/notice_update.jsp?notice_num=${notice.notice_num}">수정</a> | 
+					<a href="${pageContext.request.contextPath}/board/notice/notice_delete.jsp?notice_num=${notice.notice_num}">삭제</a></td>
 			</tr>
 		</c:if>
 	</table>

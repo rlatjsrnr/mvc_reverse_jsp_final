@@ -9,6 +9,6 @@
 </head>
 <body>
 	<h1>요청 처리실패! - ${param.message}</h1>
-	<a href="<c:url value='/board/notice/notice_list.jsp'/>">공지 메인</a>
+	<a href="<c:url value='notice.do'/>">공지 메인</a>
 </body>
 </html>

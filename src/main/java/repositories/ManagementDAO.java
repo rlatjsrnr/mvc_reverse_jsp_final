@@ -14,6 +14,8 @@ public interface ManagementDAO {
 	// 전체 회원 수
 	int getMemberTotalCount();
 	
+	MemberVO getMember(int num);
+	
 	/**
 	 * @param - 수정할 회원 정보
 	 * @return 성공 여부

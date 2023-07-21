@@ -31,7 +31,26 @@ public class ManagementController extends HttpServlet {
 			request.setAttribute("memberList", ms.getMemberList(request));			
 			view = "/management/member.jsp";
 		}
-
+				
+		if (command.equals("/managementUpdate.mgc")) {
+			// 회원 목록 페이지 요청			
+			request.setAttribute("updateMember", ms.getMember(request));			
+			view = "/management/memberUpdate.jsp";
+		}
+		if (command.equals("/managementUpdateMember.mgc")) {
+			// 회원 목록 페이지 요청			
+			ms.updateMember(request);
+			request.setAttribute("memberList", ms.getMemberList(request));
+			view = "/management/member.jsp";
+		}
+		
+		if (command.equals("/managementDelete.mgc")) {
+			// 회원 목록 페이지 요청			
+			ms.deleteMember(request);
+			request.setAttribute("memberList", ms.getMemberList(request));
+			view = "/management/member.jsp";
+		}
+		
 		if (view != null && !view.trim().equals("")) {			
 			request.getRequestDispatcher(view).forward(request, response);
 		}

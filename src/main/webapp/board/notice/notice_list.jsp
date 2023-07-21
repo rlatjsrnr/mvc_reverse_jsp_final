@@ -13,17 +13,17 @@
 		<tr>
 			<th colspan="4">${pm}</th>
 		</tr>
-		<c:if test="${!empty member and member.u_id eq 'admin'}">
+		<c:if test="${!empty member and member.id eq 'admin'}">
 		<tr>
 			<td colspan="4">
-				<a href="#">공지글 작성</a>
+				<a href="${pageContext.request.contextPath}/board/notice/notice_write.jsp">공지글 작성</a>
 			</td>
 		</tr>
 		</c:if>
 		<!-- 공지 검색 및 한번에 보여줄 페이지 개수 선택 창 -->
 		<tr>
 			<td colspan="4">
-				<form name="searchName" action="#" method="GET">
+				<form name="searchName" action="notice.do" method="GET">
 					<select name="searchType">
 						<option value="title" ${param.searchType eq 'title' ? 'selected' : ''}>제목</option>
 						<option value="content" ${param.searchType eq 'content' ? 'selected' : ''}>내용</option>
@@ -53,7 +53,7 @@
 					<tr>
 						<td>${n.notice_num}</td>
 						<td>
-							<a href="<c:url value='/board/notice/notice_detail.jsp'/>?notice_num=${n.notice_num}">
+							<a href="<c:url value='noticeDetail.do'/>?notice_num=${n.notice_num}">
 								[${n.notice_category}] ${n.notice_title}
 							</a>
 						</td>
@@ -65,19 +65,19 @@
 				<tr>
 					<th colspan="4">
 						<c:if test="${pm.first}">
-							<a href="notice_list.jsp${pm.makeQuery(1)}">[처음]</a>
+							<a href="notice.do${pm.makeQuery(1)}">[처음]</a>
 						</c:if>
 						<c:if test="${pm.prev}">
-							<a href="notice_list.jsp${pm.makeQuery(pm.startPage-1)}">[이전]</a>
+							<a href="notice.do${pm.makeQuery(pm.startPage-1)}">[이전]</a>
 						</c:if>
 						<c:forEach var="i" begin="${pm.startPage}" end="${pm.endPage}" step="1">
-							<a href="notice_list.jsp${pm.makeQuery(i)}">[${i}]</a>						
+							<a href="notice.do${pm.makeQuery(i)}">[${i}]</a>						
 						</c:forEach>
 						<c:if test="${pm.next}">
-							<a href="notice_list.jsp${pm.makeQuery(pm.endPage+1)}">[다음]</a>
+							<a href="notice.do${pm.makeQuery(pm.endPage+1)}">[다음]</a>
 						</c:if>
 						<c:if test="${pm.last}">
-							<a href="notice_list.jsp${pm.makeQuery(pm.maxPage)}">[마지막]</a>
+							<a href="notice.do${pm.makeQuery(pm.maxPage)}">[마지막]</a>
 						</c:if>
 					</th>
 				</tr>

@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="s" %>
 <jsp:include page="/common/header.jsp" />
 <section class="wrap">
-<form action="<c:url value='/management/memberSubmit.jsp'/>" method="POST">
+<form action="managementUpdateMember.mgc" method="POST">
 	<table>
 		<tr>
 			<td colspan=2><h3>회원정보 수정</h3></td>
@@ -18,13 +18,13 @@
 		<tr>
 			<td>아이디</td>
 			<td>
-				<input type="text" name="id" value="" readonly />
+				<input type="text" name="id" value="${updateMember.id}" readonly />
 			</td>
 		</tr>
 		<tr>
 			<td>비밀번호</td>
 			<td>
-				<input type="password" name="pass" value="" required />
+				<input type="password" name="pass" value="${updateMember.pass}" required />
 				<button type="button" onclick="changePass(this);">비밀번호 보기</button>
 			</td>
 		</tr>

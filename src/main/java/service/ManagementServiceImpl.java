@@ -16,7 +16,11 @@ public class ManagementServiceImpl implements ManagementService {
 	public ArrayList<MemberVO> getMemberList(HttpServletRequest request) {
 		ArrayList<MemberVO> memberList = null;
 		PageMaker pm = new PageMaker();
-		pm.getCri().setPage(Integer.parseInt(request.getParameter("page")));		
+		String page = request.getParameter("page");
+		if(page == null) {
+			page = "1";
+		}
+		pm.getCri().setPage(Integer.parseInt(page));		
 		memberList = md.getMemberList(pm.getCri());
 		int totalCount = md.getMemberTotalCount();
 		pm.setTotalCount(totalCount);
@@ -28,17 +32,52 @@ public class ManagementServiceImpl implements ManagementService {
 		
 		return null;
 	}
-
+	public MemberVO getMember(HttpServletRequest request) {
+		MemberVO member = null;
+		String num = request.getParameter("num");
+		member = md.getMember(Integer.parseInt(num));
+		if(member != null) {
+			return member;
+		}
+		return null;
+	}
 	@Override
 	public boolean updateMember(HttpServletRequest request) {
+		String num = request.getParameter("num");		
+		String pass = request.getParameter("pass");		
+		String age = request.getParameter("age");
+		String gender = request.getParameter("gender");
+		MemberVO member = md.getMember(Integer.parseInt(num));
+		member.setPass(pass);
+		member.setAge(Integer.parseInt(age));
+		member.setGender(gender);
+		int result = md.updateMember(member);
+		if(result > 0) {
+			String message = "회원 정보 수정 성공";
+			request.setAttribute("message", message);
+			return true;
+		}else {
+			String message = "회원 정보 수정 실패";
+			request.setAttribute("message", message);
+			return false;
+		}
 		
-		return false;
+				
 	}
 
 	@Override
 	public boolean deleteMember(HttpServletRequest request) {
+		String num = request.getParameter("num");	
+		int result = md.deleteMember(Integer.parseInt(num));
 		
-		return false;
+		if(result > 0) {
+			String message = "회원 삭제 성공";
+			request.setAttribute("message", message);
+			return true;
+		}else {
+			String message = "회원 삭제 실패";
+			request.setAttribute("message", message);
+			return false;
+		}		
 	}
-
 }

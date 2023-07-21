@@ -35,7 +35,8 @@
 				</td>
 				<td>
 					<!-- 기타 -->
-					
+					<a href="managementUpdate.mgc?num=${m.num}">수정</a> | 
+					<a href="managementDelete.mgc?num=${m.num}">삭제</a>
 				</td>
 			</tr>
 		</c:forEach>		
