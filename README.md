@@ -1,0 +1,4 @@
+# mvc_reverse_jsp_final
+mvc_reverse_jsp_final
+
+jsp_jstl_prac_board를 MVC방식으로 변환
