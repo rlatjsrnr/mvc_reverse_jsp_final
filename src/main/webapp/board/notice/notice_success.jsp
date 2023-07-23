@@ -9,6 +9,6 @@
 			${param.message}
 		</c:if>
 	</h1>
-	<a href="notice.do">공지 메인</a>
+	<a href="${pageContext.request.contextPath}/notice.do">공지 메인</a>
 </section>
 <jsp:include page="../../common/footer.jsp" />

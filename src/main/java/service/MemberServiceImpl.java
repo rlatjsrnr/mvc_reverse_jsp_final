@@ -20,27 +20,30 @@ public class MemberServiceImpl implements MemberService {
 		String gender = request.getParameter("gender");
 		int intAge = Integer.parseInt(age);
 		MemberVO member = new MemberVO(id, pass, name, intAge, gender);
+		String message = null;
 		if(md.memberJoin(member)) {
-			String message = "회원가입 성공";
-			request.setAttribute("message", message);
+			message = "회원가입 성공";			
 		}else {
-			String message = "회원가입 실패";
-			request.setAttribute("message", message);
+			message = "사용중인 아이디입니다. 회원가입 실패";			
 		}
+		request.setAttribute("message", message);
 	}
 
 	@Override
 	public boolean memberLogin(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
 		String pass= request.getParameter("pass");
+		String login = request.getParameter("login");
 		MemberVO member = md.memberLogin(id, pass);
 		if(member != null) {
 			request.getSession().setAttribute("member", member);
 			String message = "로그인 성공";
-			Cookie cookie = new Cookie("rememberMe", member.getId());
-			cookie.setMaxAge(60*60*24*15);
-			cookie.setPath("/");
-			response.addCookie(cookie);
+			if(login != null) {
+				Cookie cookie = new Cookie("rememberMe", member.getId());
+				cookie.setMaxAge(60*60*24*15);
+				cookie.setPath("/");
+				response.addCookie(cookie);				
+			}
 			request.setAttribute("message", message);
 			return true;
 		}
@@ -68,10 +71,14 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void withDraw(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
-		md.withDrawMember(id);
-		String message = "탈퇴완료";
-		logOut(request, response);
-		request.setAttribute("message", message);		
+		String message = null;
+		if(md.withDrawMember(id)) {
+			message = "탈퇴완료";
+			logOut(request, response);			
+		}else {
+			message = "탈퇴 요청 처리 실패";			
+		}
+		request.setAttribute("message", message);
 	}
 	
 }

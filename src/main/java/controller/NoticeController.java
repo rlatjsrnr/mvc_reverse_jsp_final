@@ -23,7 +23,7 @@ public class NoticeController extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 
-		String command = request.getRequestURI().substring(request.getRequestURI().lastIndexOf("/") + 1);
+		String command = request.getRequestURI().substring(request.getContextPath().length() + 1);
 		System.out.println("NoticeController 요청 : " + command);
 
 		String view = null;
@@ -39,23 +39,46 @@ public class NoticeController extends HttpServlet {
 			view = "/board/notice/notice_list.jsp";
 		}
 		
-		if (command.equals("noticeWrite.do")) {
-			// 공지 목록
+		if (command.equals("board/notice/noticeWrite.do")) {
+			// 공지 글 쓰기
 			if(ns.noticeWrite(request)) {
 				view = suc;
 			}else {
 				view = fail;
-			}
-			
+			}			
 		}
 		
 		if (command.equals("noticeDetail.do")) {
-			// 공지 목록
+			// 공지 글 상세페이지
 			ns.noticeDetail(request);
 			view = "/board/notice/notice_detail.jsp";
 		}
 		
+		if (command.equals("noticeUpdatePage.do")) {
+			// 공지 글 수정페이지
+			ns.noticeDetail(request);
+			view = "/board/notice/notice_update.jsp";
+		}
+		
+		if (command.equals("noticeUpdate.do")) {
+			// 공지 글 수정
+			if(ns.noticeUpdate(request)) {
+				view = suc;
+			}else {
+				view = fail;
+			}
+		}
+		
+		if (command.equals("noticeDelete.do")) {
+			// 공지 글 삭제			
+			if(ns.noticeDelete(request)) {				
+				view = suc;
+			}else {
+				view = fail;
+			}
 
+		}
+		
 		if (view != null && !view.equals("")) {
 			request.getRequestDispatcher(view).forward(request, response);
 		} else {

@@ -14,7 +14,7 @@ public interface QNABoardDAO {
 	public ArrayList<BoardVO> getBoardList(Criteria cri);
 
 	// 게시글 작성 요청
-	public void boardWrite(BoardVO board);
+	public boolean boardWrite(BoardVO board);
 
 	// 한개의 게시물 정보 요청 처리
 	public BoardVO getBoardVO(int board_num);

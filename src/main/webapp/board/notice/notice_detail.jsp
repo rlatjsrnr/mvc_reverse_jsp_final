@@ -28,8 +28,8 @@
 		<c:if test="${sessionScope.member.id eq 'admin'}">
 			<tr>
 				<td colspan=2>
-					<a href="${pageContext.request.contextPath}/board/notice/notice_update.jsp?notice_num=${notice.notice_num}">수정</a> | 
-					<a href="${pageContext.request.contextPath}/board/notice/notice_delete.jsp?notice_num=${notice.notice_num}">삭제</a></td>
+					<a href="${pageContext.request.contextPath}/noticeUpdatePage.do?notice_num=${notice.notice_num}">수정</a> | 
+					<a href="${pageContext.request.contextPath}/noticeDelete.do?notice_num=${notice.notice_num}">삭제</a></td>
 			</tr>
 		</c:if>
 	</table>

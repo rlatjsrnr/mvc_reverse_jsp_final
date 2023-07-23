@@ -36,7 +36,7 @@
 				<td>
 					<!-- 기타 -->
 					<a href="managementUpdate.mgc?num=${m.num}">수정</a> | 
-					<a href="managementDelete.mgc?num=${m.num}">삭제</a>
+					<a href="javascript:withdraw(${m.num});">삭제</a>
 				</td>
 			</tr>
 		</c:forEach>		
@@ -84,7 +84,17 @@
 </table>
 </section>
 <jsp:include page="/common/footer.jsp" />
-
+<script>
+	function withdraw(num){
+		if(num == 1){
+			alert('관리자 계정은 삭제할 수 없습니다.');
+			return;
+		}
+		if(confirm(num+'번 회원 정보를 정말 삭제하시겠습니까?')){
+			location.href='managementDelete.mgc?num='+num;
+		}
+	}
+</script>
 
 
 

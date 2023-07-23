@@ -11,12 +11,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import service.QNABoardService;
+import service.QNABoardServiceImpl;
 
 @WebServlet("*.qna")
 public class QNABoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	QNABoardService qs;
+	QNABoardService qs = new QNABoardServiceImpl();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -30,10 +31,26 @@ public class QNABoardController extends HttpServlet {
 		if (command.equals("boardList.qna")) {
 			// 질문과 답변 게시물 목록
 			ArrayList<BoardVO> list = qs.getBoardList(request);
-			request.setAttribute("list", list);
+			request.setAttribute("qnaList", list);
 			nextPage = "/board/qna/qna_list.jsp";
 		}
 
+		if (command.equals("boardWrite.qna")) {
+			// 질문과 답변 원본 글 쓰기
+			if(qs.boardWrite(request)) {
+				nextPage = "/board/qna/qna_detail.jsp";
+			}else {
+				nextPage = "/board/qna/qna_write.jsp";
+			}
+			
+		}
+		
+		if (command.equals("boardDetail.qna")) {
+			// 질문과 답변 원본 글 쓰기
+			qs.getBoardVO(request);			
+			nextPage = "/board/qna/qna_detail.jsp";
+		}
+		
 		if (nextPage != null && !nextPage.trim().equals("")) {
 			RequestDispatcher rd = request.getRequestDispatcher(nextPage);
 			rd.forward(request, response);

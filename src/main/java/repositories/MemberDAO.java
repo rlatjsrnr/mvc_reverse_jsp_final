@@ -19,6 +19,6 @@ public interface MemberDAO {
 	public MemberVO getMemberById(String id);
 
 	// 회원 탈퇴 처리 - joinYN
-	public void withDrawMember(String id);
+	public boolean withDrawMember(String id);
 
 }

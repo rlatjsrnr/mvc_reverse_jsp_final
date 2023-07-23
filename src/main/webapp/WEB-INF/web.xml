@@ -11,17 +11,17 @@
 	</welcome-file-list>
 
 	<!-- 403 error forbidden &amp; access denied -->
-	<error-page>
+	<!-- <error-page>
 		<error-code>403</error-code>
 		<location>/error/error_403.jsp</location>
 	</error-page>
-
+ -->
 	<!-- 404 page not found -->
-	<error-page>
+	<!-- <error-page>
 		<error-code>404</error-code>
 		<location>/error/error_404.jsp</location>
 	</error-page>
-	
+	 -->
 	<servlet>
 		<servlet-name>memberServlet</servlet-name>
 		<servlet-class>controller.MemberController</servlet-class>

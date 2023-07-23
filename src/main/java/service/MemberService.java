@@ -33,7 +33,6 @@ public interface MemberService {
 
 	// 자동 로그인 체크
 	static void loginCheck(HttpServletRequest request) {
-
 		Cookie[] cookies = request.getCookies();
 		for(Cookie c : cookies) {
 			String name = c.getName();

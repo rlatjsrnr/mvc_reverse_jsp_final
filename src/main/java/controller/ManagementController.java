@@ -21,30 +21,30 @@ public class ManagementController extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
-		String command = request.getRequestURI().substring(request.getRequestURI().lastIndexOf("/"));
+		String command = request.getRequestURI().substring(request.getContextPath().length() + 1);
 		System.out.println("Management 요청 : " + command);
 
 		String view = null;
 		
-		if (command.equals("/managementPage.mgc")) {
+		if (command.equals("managementPage.mgc")) {
 			// 회원 목록 페이지 요청			
 			request.setAttribute("memberList", ms.getMemberList(request));			
 			view = "/management/member.jsp";
 		}
 				
-		if (command.equals("/managementUpdate.mgc")) {
+		if (command.equals("managementUpdate.mgc")) {
 			// 회원 목록 페이지 요청			
 			request.setAttribute("updateMember", ms.getMember(request));			
 			view = "/management/memberUpdate.jsp";
 		}
-		if (command.equals("/managementUpdateMember.mgc")) {
+		if (command.equals("managementUpdateMember.mgc")) {
 			// 회원 목록 페이지 요청			
 			ms.updateMember(request);
 			request.setAttribute("memberList", ms.getMemberList(request));
 			view = "/management/member.jsp";
 		}
 		
-		if (command.equals("/managementDelete.mgc")) {
+		if (command.equals("managementDelete.mgc")) {
 			// 회원 목록 페이지 요청			
 			ms.deleteMember(request);
 			request.setAttribute("memberList", ms.getMemberList(request));

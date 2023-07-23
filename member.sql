@@ -19,7 +19,7 @@ VALUES('admin','admin','MASTER',0,'male');
 -- UPDATE mvc_member SET u_join = 'N' WHERE u_num = 회원번호;
 commit;
 SELECT * FROM mvc_member;
-
+UPDATE mvc_member SET num=1 WHERE num=4;
 SELECT * FROM mvc_member ORDER BY num DESC;
 
 -- 관리자가 아니고 탈퇴한 회원이 아닌 정보 출력
@@ -94,7 +94,7 @@ SELECT * FROM qna_board;
 DESC qna_board;
 
 -- 게시글 삭제 여부 수정
-ALTER TABLE qna_board qna_delete char(1) DEFAULT 'N' AFTER qna_readcount;
+ALTER TABLE qna_board ADD COLUMN qna_delete char(1) DEFAULT 'N' AFTER qna_readcount;
 
 
 -- sample data 추가
@@ -104,7 +104,7 @@ SELECT qna_name,qna_title,qna_content,qna_writer_num FROM qna_board;
 
 commit;
 
-SELECT * FROM qna_board;
+SELECT * FROM qna_board ORDER BY qna_re_ref DESC;
 
 DELETE FROM qna_board WHERE qna_num = 1;
 

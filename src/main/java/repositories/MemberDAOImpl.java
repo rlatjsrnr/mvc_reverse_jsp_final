@@ -33,7 +33,6 @@ public class MemberDAOImpl implements MemberDAO {
 				}				
 			}
 			
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
@@ -119,7 +118,7 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public void withDrawMember(String id) {
+	public boolean withDrawMember(String id) {
 		Connection conn = DBCPUtil.getConnection();
 		PreparedStatement pstmt = null;		
 		try {
@@ -127,13 +126,15 @@ public class MemberDAOImpl implements MemberDAO {
 			pstmt.setString(1, id);
 			int result = pstmt.executeUpdate();
 			if(result > 0) {				
-				System.out.println("탈퇴성공");
+				return true;
+			}else {
+				return false;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		}finally {
 			DBCPUtil.close(pstmt, conn);
-		}
+		}		
 	}
-
 }

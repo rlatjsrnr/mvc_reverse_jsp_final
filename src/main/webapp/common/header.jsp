@@ -11,6 +11,11 @@
 <link href="${context}/css/footer.css" rel="stylesheet" type="text/css" />
 <link href="${context}/css/common.css" rel="stylesheet" type="text/css" />
 </head>
+<c:if test="${empty sessionScope.member and !empty cookie.rememberMe}">
+	<script>
+		location.href='${pageContext.request.contextPath}/cookie.mc';
+	</script>
+</c:if>
 <c:if test="${!empty requestScope.message}">
 	<script>
 		alert('${message}');
@@ -29,7 +34,7 @@
 						<c:if test="${member.id eq 'admin'}">
 							<li><a href="${pageContext.request.contextPath}/managementPage.mgc">회원관리</a></li>
 						</c:if>
-						<li><a href="logOut.mc">로그아웃</a></li>
+						<li><a href="${pageContext.request.contextPath}/logOut.mc">로그아웃</a></li>
 					</c:when>
 					<c:otherwise>
 						<li><a href="${pageContext.request.contextPath}/member/login.jsp">로그인</a></li>
@@ -41,7 +46,7 @@
 		<div>
 			<ul>
 				<li><a href="${pageContext.request.contextPath}/notice.do">공지사항</a></li>
-				<li><a href="${pageContext.request.contextPath}/board/qna/qna_list.jsp">질문과답변</a></li>
+				<li><a href="${pageContext.request.contextPath}/boardList.qna">질문과답변</a></li>
 			</ul>
 		</div>
 	</header>

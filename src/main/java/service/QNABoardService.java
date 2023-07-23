@@ -12,7 +12,7 @@ public interface QNABoardService {
 	public ArrayList<BoardVO> getBoardList(HttpServletRequest request);
 
 	// 게시물 등록 요청
-	public void boardWrite(HttpServletRequest request);
+	public boolean boardWrite(HttpServletRequest request);
 
 	// 게시물 상세보기 요청
 	public BoardVO getBoardVO(HttpServletRequest request);

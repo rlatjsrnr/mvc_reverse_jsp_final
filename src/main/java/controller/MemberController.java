@@ -30,16 +30,19 @@ public class MemberController extends HttpServlet {
 		System.out.println(contextPath);
 		
 		// 요청 경로
-		String command = requestUri.substring(requestUri.lastIndexOf("/"));
+		String command = request.getRequestURI().substring(request.getContextPath().length() + 1);
 		System.out.println("command : "+command);		
-		
-		// Cookie 정보 확인 - 자동 로그인
-		MemberService.loginCheck(request);		
 		
 		// 요청에 따른 처리 결과 화면 을 저장할 변수 
 		String view = "";
 		// 요청에 따라 데이터의 처리가 필요하다면 서비스로 처리 요청
-		if(command.equals("/memberJoin.mc")) {
+		if(command.equals("cookie.mc")) {
+			// Cookie 정보 확인 - 자동 로그인
+			MemberService.loginCheck(request);						
+			view = "/index.jsp";			
+		}
+		
+		if(command.equals("member/memberJoin.mc")) {
 			ms.memberJoin(request, response);		
 			if(request.getAttribute("message") != null && request.getAttribute("message").equals("회원가입 성공")) {
 				view = "/member/login.jsp";
@@ -47,26 +50,25 @@ public class MemberController extends HttpServlet {
 				view = "/member/join.jsp";
 			}
 		}
-		if(command.equals("/memberLogin.mc")) {
+		if(command.equals("member/memberLogin.mc")) {
 			if(ms.memberLogin(request, response)) {
 				view = "/index.jsp";
 			}else {
 				view = "/member/login.jsp";
 			}
 		}
-		if(command.equals("/logOut.mc")) {
+		if(command.equals("logOut.mc")) {
 			ms.logOut(request, response);			
 			view = "/index.jsp";
 			
 		}
-		if(command.equals("/memberUpdate.mc")) {
+		if(command.equals("memberUpdate.mc")) {
 			
 		}
-		if(command.equals("/memberWithdraw.mc")) {
+		if(command.equals("member/memberWithdraw.mc")) {
 			ms.withDraw(request, response);
 			view = "/index.jsp";
-		}
-		
+		}		
 		
 		// view 정보가 존재할 시 forward로 페이지 이동
 		if (view != null && !view.equals("")) {

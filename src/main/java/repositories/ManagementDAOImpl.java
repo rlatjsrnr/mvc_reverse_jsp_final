@@ -16,7 +16,7 @@ public class ManagementDAOImpl implements ManagementDAO {
 		ResultSet rs = null;
 		
 		try {
-			String sql = "SELECT * FROM mvc_member ORDER BY num DESC limit ?, ?";
+			String sql = "SELECT * FROM mvc_member WHERE joinYN='Y' ORDER BY num DESC limit ?, ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, cri.getStartRow());
 			pstmt.setInt(2, cri.getPerPageNum());
@@ -53,7 +53,7 @@ public class ManagementDAOImpl implements ManagementDAO {
 		ResultSet rs = null;
 		try {
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery("SELECT count(*) FROM mvc_member");
+			rs = stmt.executeQuery("SELECT count(*) FROM mvc_member WHERE joinYN='Y'");
 			if(rs.next()) {
 				return rs.getInt(1);
 			}
@@ -132,7 +132,7 @@ public class ManagementDAOImpl implements ManagementDAO {
 		PreparedStatement pstmt = null;
 		
 		try {
-			pstmt = conn.prepareStatement("DELETE FROM mvc_member WHERE num=?");
+			pstmt = conn.prepareStatement("UPDATE mvc_member SET joinYN='N' WHERE num=?");
 			pstmt.setInt(1, num);
 			
 			int result = pstmt.executeUpdate();

@@ -3,8 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="../../common/header.jsp" />
 <section>
-	<form action="noticeUpdate.do" method="post">
+	<form action="${pageContext.request.contextPath}/noticeUpdate.do" method="post">
 		<input type="hidden" name="notice_num" value="${notice.notice_num}" />
+		<input type="hidden" name="notice_author" value="${notice.notice_author }"/>
+		<input type="hidden" name="notice_date" value="${notice.notice_date}"/>
 		<table class="list">
 			<tr>
 				<th colspan="2"><h1>공지사항 수정</h1></th>

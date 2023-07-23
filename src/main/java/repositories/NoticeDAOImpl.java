@@ -149,11 +149,47 @@ public class NoticeDAOImpl implements NoticeDAO {
 
 	@Override
 	public boolean noticeUpdate(NoticeVO vo) {
+		Connection conn = DBCPUtil.getConnection();
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement("UPDATE notice_board SET notice_category=?, notice_title=?, notice_content=? WHERE notice_num=?");
+			pstmt.setString(1, vo.getNotice_category());
+			pstmt.setString(2, vo.getNotice_title());
+			pstmt.setString(3, vo.getNotice_content());
+			pstmt.setInt(4, vo.getNotice_num());
+			
+			int result = pstmt.executeUpdate();
+			if(result > 0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBCPUtil.close(pstmt, conn);
+		}
+		
 		return false;
 	}
 
 	@Override
 	public boolean noticeDelete(int notice_num) {
+		Connection conn = DBCPUtil.getConnection();
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement("DELETE FROM notice_board WHERE notice_num=?");
+			pstmt.setInt(1, notice_num);
+			int result = pstmt.executeUpdate();
+			if(result > 0) {				
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}finally {
+			DBCPUtil.close(pstmt, conn);
+		}
 		return false;
 	}
 

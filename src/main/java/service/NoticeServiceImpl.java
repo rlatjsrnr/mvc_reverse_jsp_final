@@ -1,6 +1,7 @@
 package service;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import beans.NoticeVO;
 import jakarta.servlet.http.HttpServletRequest;
@@ -64,18 +65,54 @@ public class NoticeServiceImpl implements NoticeService {
 		NoticeVO notice = nd.noticeDetail(Integer.parseInt(notice_num));
 		if(notice != null) {
 			request.setAttribute("notice", notice);
-		}
-		
+		}		
 	}
 
 	@Override
 	public boolean noticeUpdate(HttpServletRequest request) {
-		return false;
+		String notice_num = request.getParameter("notice_num");
+		String notice_category = request.getParameter("notice_category");
+		String notice_author = request.getParameter("notice_author");
+		String notice_title = request.getParameter("notice_title");
+		String notice_content = request.getParameter("notice_content");
+		
+		
+		NoticeVO notice = new NoticeVO(notice_category, notice_author, notice_title, notice_content);
+		notice.setNotice_num(Integer.parseInt(notice_num));
+		notice.setNotice_date(new Date());
+		String message = null;
+		
+		if(nd.noticeUpdate(notice)) {
+			message = "공지 수정 성공";			
+			request.setAttribute("message", message);
+			notice = nd.noticeDetail(Integer.parseInt(notice_num));
+			request.setAttribute("notice", notice);
+			return true;
+		}else {
+			message = "공지 수정 실패";
+			request.setAttribute("message", message);
+			request.setAttribute("notice", notice);
+			return false;
+		}
 	}
 
 	@Override
 	public boolean noticeDelete(HttpServletRequest request) {
-		return false;
+		String notice_num = request.getParameter("notice_num");
+		String message = null;
+		if(nd.noticeDelete(Integer.parseInt(notice_num))) {
+			message = "공지 삭제 성공";
+			request.setAttribute("message", message);			
+			return true;
+		}else{
+			NoticeVO notice = nd.noticeDetail(Integer.parseInt(notice_num));
+			message = "공지 삭제 실패";
+			request.setAttribute("message", message);
+			request.setAttribute("notice", notice);
+			return false;
+		}
+				
+		
 	}
 
 }

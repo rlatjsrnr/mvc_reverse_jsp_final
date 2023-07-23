@@ -5,7 +5,7 @@
 <!-- notice_delete.jsp -->
 <!-- 공지글 번호로 삭제 처리 -->
 <c:catch var="e">
-	<s:update var="result" dataSource="java/MySqlDB">
+	<s:update var="result" dataSource="java/MySQLDB">
 		DELETE FROM notice_board WHERE notice_num = ?
 		<s:param>${param.notice_num}</s:param>
 	</s:update>

@@ -17,7 +17,7 @@
 		<c:if test="${!empty member}">
 			<tr>
 				<th colspan="8" style="text-align:right">
-					<a href="#">질문 작성하러 가기</a>
+					<a href="${pageContext.request.contextPath}/board/qna/qna_write.jsp">질문 작성하러 가기</a>
 				</th>
 			</tr>
 		</c:if>
@@ -46,7 +46,7 @@
 										</c:forEach>
 										└>
 									</c:if>
-									<a href="qna_detail.jsp?qna_num=${board.qna_num}">
+									<a href="${pageContext.request.contextPath}/boardDetail.qna?qna_num=${board.qna_num}">
 									${board.qna_title}
 									</a>
 								</td>
@@ -69,10 +69,10 @@
 				<tr>
 					<th colspan="8">
 						<c:if test="${pm.first}">
-							<a href="qna_list.jsp${pm.makeQuery(1)}">[&lt;&lt;]</a>
+							<a href="${pageContext.request.contextPath}/boardList.qna${pm.makeQuery(1)}">[&lt;&lt;]</a>
 						</c:if>
 						<c:if test="${pm.prev}">
-							<a href="qna_list.jsp${pm.makeQuery(pm.startPage-1)}">[&lt;]</a>
+							<a href="${pageContext.request.contextPath}/boardList.qna${pm.makeQuery(pm.startPage-1)}">[&lt;]</a>
 						</c:if>
 						<c:forEach var="i" begin="${pm.startPage}" end="${pm.endPage}">
 							<c:choose>
@@ -80,15 +80,15 @@
 									<span style='color:red;'>[${i}]</span>
 								</c:when>
 								<c:otherwise>
-									<a href="qna_list.jsp${pm.makeQuery(i)}">[${i}]</a>
+									<a href="${pageContext.request.contextPath}/boardList.qna${pm.makeQuery(i)}">[${i}]</a>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
 						<c:if test="${pm.next}">
-							<a href="qna_list.jsp${pm.makeQuery(pm.endPage+1)}">[&gt;]</a>
+							<a href="${pageContext.request.contextPath}/boardList.qna${pm.makeQuery(pm.endPage+1)}">[&gt;]</a>
 						</c:if>
 						<c:if test="${pm.last}">
-							<a href="qna_list.jsp${pm.makeQuery(pm.maxPage)}">[&gt;&gt;]</a>
+							<a href="${pageContext.request.contextPath}/boardList.qna${pm.makeQuery(pm.maxPage)}">[&gt;&gt;]</a>
 						</c:if>
 					</th>
 				</tr>

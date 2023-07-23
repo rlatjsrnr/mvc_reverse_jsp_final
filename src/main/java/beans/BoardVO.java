@@ -18,7 +18,7 @@ public class BoardVO {
 	
 	private int qna_writer_num;				// 작성자 번호
 	private int qna_readcount;				// 조회 수
-	private char qna_delete;				// 게시글 삭제 여부 default 'N'
+	private String qna_delete;				// 게시글 삭제 여부 default 'N'
 	private Date qna_date;					// 게시글 작성 시간
 	
 	public BoardVO() {}
@@ -37,7 +37,7 @@ public class BoardVO {
 	 * 리스트용 생성자
 	 */
 	public BoardVO(int qna_num, String qna_name, String qna_title, String qna_content, int qna_re_ref, int qna_re_lev,
-			int qna_re_seq, int qna_writer_num, int qna_readcount, char qna_delete, Date qna_date) {
+			int qna_re_seq, int qna_writer_num, int qna_readcount, String qna_delete, Date qna_date) {
 		super();
 		this.qna_num = qna_num;
 		this.qna_name = qna_name;
@@ -133,10 +133,10 @@ public class BoardVO {
 	public void setQna_date(Date qna_date) {
 		this.qna_date = qna_date;
 	}
-	public char getQna_delete() {
+	public String getQna_delete() {
 		return qna_delete;
 	}
-	public void setQna_delete(char qna_delete) {
+	public void setQna_delete(String qna_delete) {
 		this.qna_delete = qna_delete;
 	}
 	@Override
