@@ -8,8 +8,8 @@
 <!-- 원본글 번호 -->
 <section class="wrap">
 	<h1> 답변 글 작성</h1>
-	<form action="qna_reply_submit.jsp" method="POST">
-		<input type="hidden" name="qna_writer_num" value="${member.u_num}"/>
+	<form action="boardReplySubmit.qna" method="POST">
+		<input type="hidden" name="qna_writer_num" value="${member.num}"/>
 		<input type="hidden" name="qna_re_ref" value="${qna.qna_re_ref}"/>
 		<input type="hidden" name="qna_re_lev" value="${qna.qna_re_lev}"/>
 		<input type="hidden" name="qna_re_seq" value="${qna.qna_re_seq}"/>
@@ -17,7 +17,7 @@
 			<tr>
 				<td>작성자</td>
 				<td>
-					<input type="text" name="qna_name" value="${member.u_name}" readonly required />
+					<input type="text" name="qna_name" value="${member.name}" readonly required />
 				</td>
 			</tr>
 			<tr>

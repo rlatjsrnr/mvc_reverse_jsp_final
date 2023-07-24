@@ -68,16 +68,20 @@ public class QNABoardServiceImpl implements QNABoardService {
 
 	@Override
 	public void updateReadCount(HttpServletRequest request) {
+		int num = Integer.parseInt(request.getParameter("qna_num"));
+		qd.updateReadCount(num);
 	}
 
 	@Override
 	public BoardVO boardReply(HttpServletRequest request) {
+		
 		return null;
 	}
 
 	@Override
 	public void boardReplySubmit(HttpServletRequest request) {
-
+		int qna_re_ref = Integer.parseInt(request.getParameter("qna_re_ref"));
+		
 	}
 
 	@Override

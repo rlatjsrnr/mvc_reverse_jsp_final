@@ -24,7 +24,7 @@
 		<tr>
 			<td colspan=2>
 			<c:if test="${!empty member}">
-				<a href="qna_reply.jsp?qna_num=${qna.qna_num}">[답글]</a>
+				<a href="boardReply.qna?qna_num=${qna.qna_num}">[답글]</a>
 				<c:if test="${qna.qna_writer_num eq member.num}">
 					<a href="qna_update.jsp?qna_num=${qna.qna_num}">[수정]</a>
 					<a href="qna_delete.jsp?qna_num=${qna.qna_num}">[삭제]</a>

@@ -39,8 +39,8 @@ public class QNABoardDAOImpl implements QNABoardDAO {
 		ResultSet rs = null;
 	
 		try {
-			pstmt = conn.prepareStatement("SELECT * FROM qna_board ORDER BY qna_re_ref DESC limit ?, ?");
-			pstmt.setInt(1, cri.getPage());
+			pstmt = conn.prepareStatement("SELECT * FROM qna_board ORDER BY qna_re_ref DESC, qna_re_seq ASC limit ?, ?");
+			pstmt.setInt(1, cri.getStartRow());
 			pstmt.setInt(2, cri.getPerPageNum());
 			rs = pstmt.executeQuery();
 			
@@ -142,7 +142,20 @@ public class QNABoardDAOImpl implements QNABoardDAO {
 
 	@Override
 	public void updateReadCount(int board_num) {
+		Connection conn = DBCPUtil.getConnection();
+		PreparedStatement pstmt = null;
 		
+		try {
+			pstmt = conn.prepareStatement("UPDATE qna_board SET qna_readcount=qna_readcount+1 WHERE qna_num=?");
+			pstmt.setInt(1, board_num);
+			
+			pstmt.executeUpdate();			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBCPUtil.close(pstmt, conn);
+		}
 	}
 
 	@Override

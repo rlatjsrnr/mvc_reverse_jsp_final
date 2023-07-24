@@ -47,7 +47,19 @@ public class QNABoardController extends HttpServlet {
 		
 		if (command.equals("boardDetail.qna")) {
 			// 질문과 답변 원본 글 쓰기
-			qs.getBoardVO(request);			
+			qs.updateReadCount(request);
+			qs.getBoardVO(request);
+			nextPage = "/board/qna/qna_detail.jsp";
+		}
+		
+		if (command.equals("boardReply.qna")) {
+			// 질문과 답변 답글 쓰기 페이지			
+			nextPage = "/board/qna/qna_reply.jsp";
+		}
+		
+		if (command.equals("boardReplySubmit.qna")) {
+			// 질문과 답변 답글 쓰기			
+			
 			nextPage = "/board/qna/qna_detail.jsp";
 		}
 		
