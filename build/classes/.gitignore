@@ -1,5 +1,4 @@
-/controller/
-/service/
 /repositories/
-/beans/
+/service/
 /util/
+/controller/

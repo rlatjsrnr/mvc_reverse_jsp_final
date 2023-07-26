@@ -3,6 +3,8 @@ package repositories;
 import java.sql.*;
 import java.util.ArrayList;
 
+import org.apache.tomcat.dbcp.dbcp2.PStmtKey;
+
 import beans.BoardVO;
 import util.Criteria;
 import util.DBCPUtil;
@@ -159,17 +161,84 @@ public class QNABoardDAOImpl implements QNABoardDAO {
 	}
 
 	@Override
-	public void boardReplySubmit(BoardVO board) {
-
+	public int boardReplySubmit(BoardVO board) {
+		Connection conn = DBCPUtil.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement("UPDATE qna_board SET qna_re_seq = qna_re_seq+1 WHERE qna_re_ref = ? AND qna_re_seq > ?");
+			pstmt.setInt(1, board.getQna_re_ref());
+			pstmt.setInt(2, board.getQna_re_seq());
+			int result = pstmt.executeUpdate();
+		
+			DBCPUtil.close(pstmt);
+			pstmt = conn.prepareStatement("INSERT INTO qna_board VALUES(null,?,?,?,?,?,?,?,0,'N',now())");
+			pstmt.setString(1, board.getQna_name());
+			pstmt.setString(2, board.getQna_title());
+			pstmt.setString(3, board.getQna_content());
+			pstmt.setInt(4, board.getQna_re_ref());
+			pstmt.setInt(5, board.getQna_re_lev()+1);
+			pstmt.setInt(6, board.getQna_re_seq()+1);
+			pstmt.setInt(7, board.getQna_writer_num());
+			
+			result =  pstmt.executeUpdate();
+			if(result > 0) {
+				DBCPUtil.close(pstmt);
+				pstmt = conn.prepareStatement("SELECT qna_num FROM qna_board WHERE qna_num=LAST_INSERT_ID()");
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					int num = rs.getInt(1);
+					return num;
+				}
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			return -1;
+		}finally {
+			DBCPUtil.close(rs,pstmt,conn);
+		}
+		return -1;
 	}
 
 	@Override
 	public void boardUpdate(BoardVO board) {
-
+		Connection conn = DBCPUtil.getConnection();
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement("UPDATE qna_board SET qna_name=?, qna_title=?, qna_content=? WHERE qna_num=?");
+			pstmt.setString(1, board.getQna_name());
+			pstmt.setString(2, board.getQna_title());
+			pstmt.setString(3, board.getQna_content());
+			pstmt.setInt(4, board.getQna_num());
+			int result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBCPUtil.close(pstmt, conn);
+		}
 	}
 
 	@Override
 	public boolean boardDelete(int board_num, int qna_writer_num) {
+		Connection conn = DBCPUtil.getConnection();
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement("UPDATE qna_board SET qna_delete='Y' WHERE qna_num=? AND qna_writer_num=?");
+			pstmt.setInt(1, board_num);
+			pstmt.setInt(2, qna_writer_num);
+			int result = pstmt.executeUpdate();
+			if(result > 0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBCPUtil.close(pstmt, conn);
+		}
 		return false;
 	}
 

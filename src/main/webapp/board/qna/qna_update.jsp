@@ -6,7 +6,7 @@
 <jsp:include page="../../common/header.jsp" />
 <section class="wrap">
 <!-- qna_update.jsp -->
-	<form action="qna_update_submit.jsp" method="POST">
+	<form action="boardUpdateSubmit.qna" method="POST">
 		<input type="hidden" name="qna_num" value="${qna.qna_num}"/>
 		<input type="hidden" name="qna_writer_num" value="${qna.qna_writer_num}"/>
 		<table>
@@ -16,7 +16,7 @@
 			<tr>
 				<td>작성자</td>
 				<td>
-					<input type="text" name="qna_name" value="${member.qna_name}" required />
+					<input type="text" name="qna_name" value="${qna.qna_name}" required />
 				</td>
 			</tr>
 			<tr>

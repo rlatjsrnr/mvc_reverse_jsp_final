@@ -22,7 +22,6 @@ public class ManagementController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		String command = request.getRequestURI().substring(request.getContextPath().length() + 1);
-		System.out.println("Management 요청 : " + command);
 
 		String view = null;
 		

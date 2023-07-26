@@ -23,7 +23,7 @@ public interface QNABoardDAO {
 	public void updateReadCount(int board_num);
 
 	// 답변글 작성
-	public void boardReplySubmit(BoardVO board);
+	public int boardReplySubmit(BoardVO board);
 
 	// 게시글 수정
 	public void boardUpdate(BoardVO board);

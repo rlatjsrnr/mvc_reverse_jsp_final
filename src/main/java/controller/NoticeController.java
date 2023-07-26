@@ -24,8 +24,7 @@ public class NoticeController extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		String command = request.getRequestURI().substring(request.getContextPath().length() + 1);
-		System.out.println("NoticeController 요청 : " + command);
-
+		
 		String view = null;
 
 		boolean isSuccess = false;

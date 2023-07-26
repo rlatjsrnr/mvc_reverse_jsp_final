@@ -26,8 +26,8 @@
 			<c:if test="${!empty member}">
 				<a href="boardReply.qna?qna_num=${qna.qna_num}">[답글]</a>
 				<c:if test="${qna.qna_writer_num eq member.num}">
-					<a href="qna_update.jsp?qna_num=${qna.qna_num}">[수정]</a>
-					<a href="qna_delete.jsp?qna_num=${qna.qna_num}">[삭제]</a>
+					<a href="boardUpdate.qna?qna_num=${qna.qna_num}">[수정]</a>
+					<a href="boardDelete.qna?qna_num=${qna.qna_num}&qna_writer_num=${qna.qna_writer_num}">[삭제]</a>
 				</c:if>
 			</c:if> 
 			<a href="${pageContext.request.contextPath}/boardList.qna">[목록]</a></td>

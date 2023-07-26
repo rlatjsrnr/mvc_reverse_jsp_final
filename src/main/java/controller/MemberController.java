@@ -24,10 +24,6 @@ public class MemberController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String requestUri = request.getRequestURI();	
-		System.out.println(requestUri);
-		String contextPath = request.getContextPath();
-		System.out.println(contextPath);
 		
 		// 요청 경로
 		String command = request.getRequestURI().substring(request.getContextPath().length() + 1);

@@ -23,8 +23,7 @@ public class QNABoardController extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 
-		String command = request.getRequestURI().substring(request.getContextPath().length() + 1);
-		System.out.println("command : " + command);
+		String command = request.getRequestURI().substring(request.getContextPath().length() + 1);		
 
 		String nextPage = null;
 
@@ -53,14 +52,33 @@ public class QNABoardController extends HttpServlet {
 		}
 		
 		if (command.equals("boardReply.qna")) {
-			// 질문과 답변 답글 쓰기 페이지			
+			// 질문과 답변 답글 쓰기 페이지
+			qs.getBoardVO(request);
 			nextPage = "/board/qna/qna_reply.jsp";
 		}
 		
 		if (command.equals("boardReplySubmit.qna")) {
 			// 질문과 답변 답글 쓰기			
-			
+			qs.boardReplySubmit(request);
 			nextPage = "/board/qna/qna_detail.jsp";
+		}
+		
+		if (command.equals("boardUpdate.qna")) {
+			// 질문과 답변 글 수정 페이지
+			qs.getBoardVOByUpdate(request);
+			nextPage = "/board/qna/qna_update.jsp";
+		}
+		
+		if (command.equals("boardUpdateSubmit.qna")) {
+			// 질문과 답변 글 수정 페이지
+			qs.boardUpdate(request, response);
+			nextPage = "/board/qna/qna_detail.jsp";
+		}
+		
+		if (command.equals("boardDelete.qna")) {
+			// 질문과 답변 글 수정 페이지
+			qs.boardDelete(request, response);			
+			nextPage = "/board/qna/qna_list.jsp";
 		}
 		
 		if (nextPage != null && !nextPage.trim().equals("")) {
